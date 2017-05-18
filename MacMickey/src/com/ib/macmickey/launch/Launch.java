@@ -11,15 +11,15 @@ public class Launch {
 	
 	public static void main(String[] args) {
 		
-		MainWindow mw = new MainWindow();
+		MainWindow mw = new MainWindow(new Client());
 		
-		Client c = new Client(1);
-		
-		c.askForMenus(new BigMickey(), new FrenchFries(), new Cola());
-		c.askFor(new Nuggets());
-		
-		c.showCommand();
-		c.showLeftMoney();
+//		Client c = new Client(1);
+//		
+//		c.askForMenus(new BigMickey(), new FrenchFries(), new Cola());
+//		c.askFor(new Nuggets());
+//		
+//		c.showCommand();
+//		c.showLeftMoney();
 		
 	}
 	

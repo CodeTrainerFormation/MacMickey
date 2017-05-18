@@ -83,4 +83,9 @@ public class Client {
 		float rest = this.command.getMaxPrice() - this.command.getPrice();
 		System.out.println(rest);
 	}
+
+	public Command getCommand() {
+		return command;
+	}
+	
 }
