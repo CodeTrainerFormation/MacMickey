@@ -2,6 +2,8 @@ package com.ib.macmickey.gui;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -13,6 +15,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import com.ib.macmickey.dao.CommandDAO;
 import com.ib.macmickey.entities.Client;
 import com.ib.macmickey.listeners.ButtonListener;
 
@@ -59,6 +62,15 @@ public class MainWindow extends JFrame {
 		southPane.add(reset);
 		
 		this.validate = new JButton(ihmBundle.getString("validate"));
+		this.validate.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				
+				CommandDAO dao = new CommandDAO();
+				dao.insertCommand(client.getCommand());
+			}
+		});
 		southPane.add(validate);
 		
 		//CENTER
