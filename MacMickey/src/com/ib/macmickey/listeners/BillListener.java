@@ -10,6 +10,7 @@ import java.io.RandomAccessFile;
 import java.util.Date;
 
 import com.ib.macmickey.entities.Client;
+import com.ib.macmickey.threads.BillThread;
 
 public class BillListener implements ActionListener{
 
@@ -23,22 +24,7 @@ public class BillListener implements ActionListener{
 	public void actionPerformed(ActionEvent arg0) {
 		// TODO Auto-generated method stub
 		
-		File f = new File("bills");
-		if(!f.exists()) {
-			f.mkdir();
-		}
-		
-		String filename = "bill-" + new Date().getTime() + ".txt";
-		
-		try {
-			FileWriter fw = new FileWriter("bills/"+filename);
-			
-			fw.write(client.generateDetailCommand());
-			
-			fw.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		new BillThread(client.generateDetailCommand()).start();
 		
 	}
 	

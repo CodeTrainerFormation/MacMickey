@@ -1,0 +1,8 @@
+Detail Commande
+Nuggets	4.3€
+Iced Tea	1.7€
+French fries	1.9€
+Potatoes	2.7€
+Potatoes	2.7€
+**************
+Total	13.3€

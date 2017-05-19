@@ -15,6 +15,10 @@ public class CommandModel extends AbstractTableModel{
 		getData();
 	}
 	
+	public void refreshData() {
+		this.getData();
+	}
+	
 	private void getData() {
 		CommandDAO dao = new CommandDAO();
 		
@@ -28,6 +32,7 @@ public class CommandModel extends AbstractTableModel{
 
 	@Override
 	public int getRowCount() {
+		System.out.println("sdfsd");
 		if(this.commands == null) {
 			return 0;
 		}

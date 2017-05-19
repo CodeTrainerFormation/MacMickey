@@ -19,6 +19,7 @@ import com.ib.macmickey.dao.CommandDAO;
 import com.ib.macmickey.entities.Client;
 import com.ib.macmickey.listeners.BillListener;
 import com.ib.macmickey.listeners.ButtonListener;
+import javax.swing.JTabbedPane;
 
 public class MainWindow extends JFrame {
 
@@ -29,6 +30,7 @@ public class MainWindow extends JFrame {
 	private JButton reset, validate, bill, bigmickey,
 			nuggets, cola, icedtea, fries, potatoes;
 	private JTextArea detail;
+	private HistoryWindow history;
 
 	public MainWindow(Client _client) {
 		this.client = _client;
@@ -37,15 +39,21 @@ public class MainWindow extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 
-		this.createMainPane();
-		
-		HistoryWindow history = new HistoryWindow();
+		//this.createMainPane();
+		contentPane = new JPanel();
+		this.history = new HistoryWindow();
 		setContentPane(contentPane);
+		
+		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane.addTab("Commande", createMainPane());
+		tabbedPane.addTab("Historique", history);
+		
+		contentPane.add(tabbedPane);
 		setVisible(true);
 	}
 	
-	public void createMainPane() {
-		contentPane = new JPanel();
+	public JPanel createMainPane() {
+		JPanel contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		
@@ -71,6 +79,8 @@ public class MainWindow extends JFrame {
 				// TODO Auto-generated method stub
 				CommandDAO dao = new CommandDAO();
 				dao.insertCommand(client.getCommand());
+				history.getCmdModel().refreshData();
+				history.getCmdModel().fireTableDataChanged();
 			}
 		});
 		southPane.add(validate);
@@ -124,6 +134,8 @@ public class MainWindow extends JFrame {
 		contentPane.add(northPane, BorderLayout.NORTH);
 		contentPane.add(southPane, BorderLayout.SOUTH);
 		contentPane.add(centerPane, BorderLayout.CENTER);
+		
+		return contentPane;
 		
 	}
 

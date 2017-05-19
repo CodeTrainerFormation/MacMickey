@@ -1,0 +1,6 @@
+Detail Commande
+Big Mickey	2.7€
+Iced Tea	1.7€
+French fries	1.9€
+**************
+Total	6.3€
