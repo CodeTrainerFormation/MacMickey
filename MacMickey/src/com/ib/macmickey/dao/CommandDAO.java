@@ -2,7 +2,9 @@ package com.ib.macmickey.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 import com.ib.macmickey.entities.Command;
 
@@ -26,5 +28,24 @@ public class CommandDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	// créer une méthode qui recupère toutes les commandes
+	public ResultSet getCommands() {
+		String sql = "SELECT * FROM orders";
+		
+		ResultSet commands = null;
+		
+		try {
+			Statement stmt = this.connection.createStatement();
+			
+			commands = stmt.executeQuery(sql);
+			
+			return commands;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return null;
 	}
 }

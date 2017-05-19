@@ -17,6 +17,7 @@ import javax.swing.border.EmptyBorder;
 
 import com.ib.macmickey.dao.CommandDAO;
 import com.ib.macmickey.entities.Client;
+import com.ib.macmickey.listeners.BillListener;
 import com.ib.macmickey.listeners.ButtonListener;
 
 public class MainWindow extends JFrame {
@@ -25,7 +26,7 @@ public class MainWindow extends JFrame {
 	private JPanel contentPane;
 	private ResourceBundle ihmBundle;
 	private JTextField currentPrice;
-	private JButton reset, validate, bigmickey,
+	private JButton reset, validate, bill, bigmickey,
 			nuggets, cola, icedtea, fries, potatoes;
 	private JTextArea detail;
 
@@ -38,6 +39,7 @@ public class MainWindow extends JFrame {
 
 		this.createMainPane();
 		
+		HistoryWindow history = new HistoryWindow();
 		setContentPane(contentPane);
 		setVisible(true);
 	}
@@ -66,12 +68,16 @@ public class MainWindow extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				
+				// TODO Auto-generated method stub
 				CommandDAO dao = new CommandDAO();
 				dao.insertCommand(client.getCommand());
 			}
 		});
 		southPane.add(validate);
+		
+		this.bill = new JButton(ihmBundle.getString("bill"));
+		this.bill.addActionListener(new BillListener(client));
+		southPane.add(bill);
 		
 		//CENTER
 		JPanel centerPane = new JPanel();
